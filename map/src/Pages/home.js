@@ -30,15 +30,51 @@ import CardMedia from '@mui/material/CardMedia';
 import ImageAndares from '../image/imageAndares.png'
 import ImgLogo from '../image/logo.png'
 import ImageAndar from '../image/imageAndar.png'
+import ImageAuditorio from '../image/MapAuditorio.png'
+import ImageTerro from '../image/Mapterreo.png'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+
+
+const statusAndar = (value) => {
+  if (value === "LoL") {
+    return 'Sétimo Andar'
+  }
+
+  if (value === 'Lojas') {
+    return 'Corredor nono Andar'
+  }
+
+
+  if (value === 'Just Dance') {
+    return 'Em Frente ao CRA'
+  }
+
+  if (value === 'Campeonato') {
+    return 'Aúditorio'
+  }
+
+  if (value === 'Eventos') {
+    return 'Auditorio'
+  }
+
+  if (value === 'Karaokê') {
+    return 'Ao lado do Auditorio'
+  }
+
+
+
+}
+
+
 
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Gekke Festival
+      <Link color="inherit" href="https://www.uninassau.edu.br">
+        Uninassau
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -113,9 +149,12 @@ function DashboardContent() {
     setTypeevent(item)
   }
 
-  function GoBackAndares(){
+  function GoBackAndares() {
     setTypeevent("")
   }
+
+
+  console.log(Typeevent)
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -157,10 +196,24 @@ function DashboardContent() {
             </IconButton> */}
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={true} sx={{ backgroundColor: 'red' }}>
+        <Drawer variant="permanent" open={open} sx={{ backgroundColor: 'red' }}>
           <Toolbar
             sx={{
-              display: 'flex',
+              display: { xs: 'flex', md: 'none' },
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              px: [1],
+            }}
+          >
+            <IconButton onClick={toggleDrawer}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </Toolbar>
+          <Divider />
+
+          <Toolbar
+            sx={{
+              display: { xs: 'none', md: 'flex' },
               alignItems: 'center',
               justifyContent: 'flex-end',
               px: [1],
@@ -199,30 +252,67 @@ function DashboardContent() {
                 <Card>
                   <CardContent>
                     {Typeevent !== "" ? (
-                    <div>
-                      <IconButton onClick={() => GoBackAndares()}>
-                        <ArrowBackIcon sx={{ color: 'white' }} />
-                      </IconButton>
-                      Voltar aos Andares
-                    </div>
-                    ):(
+                      <div>
+                        <IconButton onClick={() => GoBackAndares()}>
+                          <ArrowBackIcon sx={{ color: 'white' }} />
+                        </IconButton>
+                        Voltar aos Andares
+                      </div>
+                    ) : (
                       ""
                     )}
                     <Box sx={{ display: 'flex', justifyContent: 'left', flexDirection: 'column' }}>
                       {Typeevent === "" ? (
-                        <CardMedia
-                          component="img"
-                          alt="map elevador"
-                          sx={{ height: { xs: 150, md: 600 } }}
-                          image={ImageAndares}
-                        />
+                        <>
+                          <Box sx={{
+                            display: 'flex', justifyContent: 'center', fontSize: { xs: '15px', md: '35px' },
+                          }}>
+                            Acesso aos Andares
+                          </Box>
+
+                          <CardMedia
+                            component="img"
+                            alt="map elevador"
+                            sx={{ height: { xs: 150, md: 600 } }}
+                            image={ImageAndares}
+                          />
+                        </>
                       ) : (
-                        <CardMedia
-                          component="img"
-                          alt="map elevador"
-                          sx={{ height: { xs: 150, md: 600 } }}
-                          image={ImageAndar}
-                        />
+                        <>
+                          <Box sx={{ display: 'flex', justifyContent: 'center', fontSize: { xs: '15px', md: '35px' } }}>
+                            {Typeevent} {statusAndar(Typeevent)}
+                          </Box>
+
+                          {Typeevent === "Just Dance" && (
+                            <CardMedia
+                              component="img"
+                              alt="map elevador"
+                              sx={{ height: { xs: 150, md: 600 } }}
+                              image={ImageTerro}
+                            />
+                          )}
+
+
+                          {Typeevent === 'Lojas' || Typeevent === "Karaokê" || Typeevent === 'Campeonato' || Typeevent === 'Eventos' ? (
+                            <CardMedia
+                              component="img"
+                              alt="map elevador"
+                              sx={{ height: { xs: 150, md: 600 } }}
+                              image={ImageAuditorio}
+                            />
+                          ) : (
+                            ""
+                          )}
+
+                          {Typeevent === 'LoL' && (
+                            <CardMedia
+                              component="img"
+                              alt="map elevador"
+                              sx={{ height: { xs: 150, md: 600 } }}
+                              image={ImageAndar}
+                            />
+                          )}
+                        </>
                       )}
 
 
@@ -242,7 +332,7 @@ function DashboardContent() {
           </Container>
         </Box>
       </Box>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
 

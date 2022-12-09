@@ -14,6 +14,7 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import StoreMallDirectoryIcon from '@mui/icons-material/StoreMallDirectory';
 import NightlifeIcon from '@mui/icons-material/Nightlife';
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 export default function MainListItems({nameEvent}) {
   return (
     <React.Fragment >
@@ -87,6 +88,23 @@ export default function MainListItems({nameEvent}) {
         </ListItemIcon>
         <ListItemText primary="Karaokê" sx={{ color: 'white' }} />
       </ListItemButton>
+
+      <ListItemButton 
+      sx={{ 
+        background: "linear-gradient(101.05deg, #1F8EBE -5.36%, #440495 29.46%, #440495 56.03%, #B102CD 81.92%)", 
+      marginTop: '1rem', 
+      marginBottom: '1rem', 
+      borderRadius: 2 
+      }}
+      onClick={() => nameEvent("LoL")}
+      >
+        <ListItemIcon>
+          <SportsEsportsIcon sx={{ color: 'white' }} />
+        </ListItemIcon>
+        <ListItemText primary="LoL" sx={{ color: 'white' }} />
+      </ListItemButton>
+
+
     </React.Fragment>
   )
 }
